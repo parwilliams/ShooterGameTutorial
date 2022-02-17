@@ -20,15 +20,16 @@ public class PlayerController : MonoBehaviour
     }
 
     void FixedUpdate(){
-        float Horz = Input.GetAxis("Horizontal");
-        float Vert = Input.GetAxis("Vertical");
+        float Horz = Input.GetAxis(HorzAxis);
+        float Vert = Input.GetAxis(VertAxis);
        
         Vector3 MoveDirection = new Vector3(Horz, 0.0f, Vert);
 
         ThisBody.AddForce(MoveDirection.normalized * MaxSpeed);
 
         ThisBody.velocity = new Vector3(Mathf.Clamp(ThisBody.velocity.x, - MaxSpeed, MaxSpeed), 
-                    Mathf.Clamp(ThisBody.velocity.y, - MaxSpeed, MaxSpeed), Mathf.Clamp(ThisBody.velocity.z, -MaxSpeed, MaxSpeed));
+                                       Mathf.Clamp(ThisBody.velocity.y, - MaxSpeed, MaxSpeed), 
+                                       Mathf.Clamp(ThisBody.velocity.z, -MaxSpeed, MaxSpeed));
 
         if(MouseLook){
             Vector3 MousePosWorld = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
@@ -39,17 +40,24 @@ public class PlayerController : MonoBehaviour
 
             transform.localRotation = Quaternion.LookRotation(LookDirection.normalized, Vector3.up);
 
-            if(Input.GetButtonDown("Fire1") && CanFire){
-                foreach(Transform T in TurretTransforms){
-                    AmmoManager.SpawnAmmo(T.position, T.rotation);
-                }
-                //CanFire = false;
-                //Invoke("EnableFire", ReloadDelay);
-            }
+            
         }
 
-        void EnableFire(){
-            CanFire = true;
+        if (Input.GetButtonDown(FireAxis) && CanFire)
+        {
+            foreach (Transform T in TurretTransforms)
+            {
+                AmmoManager.SpawnAmmo(T.position, T.rotation);
+            }
+            CanFire = false;
+            Invoke("EnableFire", ReloadDelay);
+            //CanFire = true;
         }
     }
+
+    void EnableFire()
+    {
+        CanFire = true;
+    }
+
 }

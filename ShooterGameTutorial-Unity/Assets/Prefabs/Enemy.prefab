@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 3887506687819649949}
   - component: {fileID: 3887506687819649948}
   - component: {fileID: 3887506687819649954}
+  - component: {fileID: -3197297460244674226}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -144,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 178eb9826bf41f84388e5916eddfc4e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DeathParticlesPrefab: {fileID: 2611780958399870525, guid: cffd1ce1250779b4cba98f0caf2f285e, type: 3}
+  DeathParticlesPrefab: {fileID: 5489692708884481143, guid: 7c88a85c5ca69174ab27da9056b00c3a, type: 3}
   ShouldDestroyOnDeath: 1
   _HealthPoints: 100
 --- !u!114 &3887506687819649949
@@ -187,3 +188,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DamageRate: 10
+--- !u!114 &-3197297460244674226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3887506687819649951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc6d9f688d0d59f4d8af0e354357138a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScoreValue: 50
