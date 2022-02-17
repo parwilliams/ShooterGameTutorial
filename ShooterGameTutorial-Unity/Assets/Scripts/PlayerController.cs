@@ -8,8 +8,12 @@ public class PlayerController : MonoBehaviour
     public string HorzAxis = "Horizontal";
     public string VertAxis = "Vertical";
     public string FireAxis = "Fire1";
+    public float ReloadDelay = 0.3f;
+    public bool CanFire = true;
+    public Transform[] TurretTransforms;
     public float MaxSpeed = 5f;
     private Rigidbody ThisBody = null;
+
 
     void Awake(){
         ThisBody = GetComponent<Rigidbody>();
@@ -34,6 +38,18 @@ public class PlayerController : MonoBehaviour
             Vector3 LookDirection = MousePosWorld - transform.position;
 
             transform.localRotation = Quaternion.LookRotation(LookDirection.normalized, Vector3.up);
+
+            if(Input.GetButtonDown("Fire1") && CanFire){
+                foreach(Transform T in TurretTransforms){
+                    AmmoManager.SpawnAmmo(T.position, T.rotation);
+                }
+                //CanFire = false;
+                //Invoke("EnableFire", ReloadDelay);
+            }
+        }
+
+        void EnableFire(){
+            CanFire = true;
         }
     }
 }
