@@ -17,6 +17,21 @@ public class Health : MonoBehaviour
 
         set {
             _HealthPoints = value;
+
+            if(HealthPoints <= 0)
+            {
+                SendMessage("Die", SendMessageOptions.DontRequireReceiver);
+
+                if(DeathParticlesPrefab != null)
+                {
+                    Instantiate(DeathParticlesPrefab, transform.position, transform.rotation);
+                }
+
+                if (ShouldDestroyOnDeath)
+                {
+                    Destroy(gameObject);
+                }
+            }
         }
     }
 
