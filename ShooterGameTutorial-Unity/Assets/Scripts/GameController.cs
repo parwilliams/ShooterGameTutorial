@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class GameController : MonoBehaviour
    
     public Text ScoreText = null;
     public Text GameOverText = null;
+
+    //Added for Replayability
+    public GameObject Player = null;
+    public Button button = null;
 
     void Awake()
     {
@@ -23,6 +28,11 @@ public class GameController : MonoBehaviour
         {
             ScoreText.text = ScorePrefix + Score.ToString();
         }
+
+        if(Player == null)
+        {
+            GameOver();
+        }
     }
 
     public static void GameOver()
@@ -31,5 +41,10 @@ public class GameController : MonoBehaviour
         {
             ThisInstance.GameOverText.gameObject.SetActive(true);
         }
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

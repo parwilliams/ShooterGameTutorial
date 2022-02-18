@@ -10,5 +10,10 @@ public class Mover : MonoBehaviour
     void Update()
     {
         transform.position += transform.forward * MaxSpeed * Time.deltaTime;
+
+        if(transform.position.x < -20 || transform.position.x > 20 || transform.position.z <-20 || transform.position.z > 20)
+        {
+            Destroy(gameObject);
+        }
     }
 }
